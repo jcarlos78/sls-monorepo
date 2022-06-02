@@ -1,0 +1,6 @@
+# serverless-compose.yml
+services:
+  operacao:
+    path: operacao-consumo
+  plataforma:
+    path: operacao-eficiencia

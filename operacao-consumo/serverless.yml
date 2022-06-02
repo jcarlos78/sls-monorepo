@@ -1,0 +1,32 @@
+service: operacao-consumo
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  beploymentBucket:
+    name: the.sls.deploy
+    serverSideEncryption: AES256
+
+package:
+  exclude:
+    - node_modules/**
+    - venv/**
+
+functions:
+  post-criarConsumo:
+    handler: handler.criarConsumo
+    events:
+      - httpApi:
+          path: /
+          method: post
+  get-listarConsumo:
+    handler: handler.listarConsumo
+    events:
+      - httpApi:
+          path: /
+          method: get          
+
+plugins:
+  - serverless-deployment-bucket
+  - serverless-offline

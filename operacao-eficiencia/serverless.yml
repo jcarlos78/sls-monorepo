@@ -1,0 +1,20 @@
+service: operacao-eficiencia
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  beploymentBucket:
+    name: the.sls.deploy
+    serverSideEncryption: AES256
+
+functions:
+  get-relatorio:
+    handler: handler.relatorio
+    events:
+      - httpApi:
+          path: /
+          method: get
+
+plugins:
+  - serverless-deployment-bucket
